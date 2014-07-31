@@ -381,3 +381,13 @@ Handler.prototype.guzhuyizhiResult = function(msg, session, next){
 		}
 	}
 }
+
+function DoSendMessage(uids, functionName, param){
+	for (var i = 0; i < uids.length; i++) {
+		this.app.rpc.chat.chatRemote.getPlayerSid(uids[0], function(error, sid){
+			if (!error){
+				messageService.pushMessageToPlayer({uid: uids[0], sid: sid}, functionName.toString(), param);
+			}
+		})
+	};
+}

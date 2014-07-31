@@ -48,7 +48,7 @@ userDao.checkUsernameAndPassword = function(username, password, callback){
 	})
 }
 
-userDao.getPlayersByUid = function(uid, cb){
+userDao.getPlayerByUid = function(uid, cb){
 	var sql = 'select * from playerInfo where userId = ?';
 	var args = [uid];
 

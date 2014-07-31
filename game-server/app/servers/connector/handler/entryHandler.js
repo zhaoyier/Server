@@ -42,7 +42,7 @@ Handler.prototype.entry = function(msg, session, next){
 			}
 
 			uid = user.id;
-			userDao.getPlayersByUid(user.id, cb);
+			userDao.getPlayerByUid(user.id, cb);
 		}, function(res, cb){
 			players = res;
 			self.app.get('sessionService').kick(uid, cb);
@@ -93,17 +93,25 @@ Handler.prototype.register = function(msg, session, next) {
     }) 
 };
 
+Handler.prototype.forgetPassword = function(msg, session, next){
+	//
+}
+
+Handler.prototype.resetPassword = function(msg, session, next){
+	//
+}
+
 var onUserLeave = function(app, session){
 	if (!session || session.uid){
 		return;
 	}
 
 	utils.myPrint('1 ~ onUserLeave is running ...');
-	/*app.rpc.area.playerRemote.playerLeave(session, {userId: session.get('userId'), instanceId: session.get('instanceId')}, function(error){
+	app.rpc.area.playerRemote.playerLeave(session, {userId: session.get('userId'), instanceId: session.get('instanceId')}, function(error){
 		if (!!error){
 			logger.error('user leave error! %j', error);
 		}
-	})*/
+	})
 
 	app.rpc.chat.chatRemote.kick(session, session.uid, null);
 };
